@@ -8,11 +8,11 @@ const llm = new ChatGoogleGenerativeAI({
   apiKey: envConfig.GEMINI_API_KEY,
 });
 
-async () => {
+const main = async () => {
   const response = await llm.invoke([
     {
       role: "system",
-      content: "Translate this message to the Franch",
+      content: "Translate this message to French",
     },
     {
       role: "human",
@@ -20,5 +20,10 @@ async () => {
     },
   ]);
 
-  console.log(response);
+  console.log("Model response:", response.content);
 };
+
+main().catch((error) => {
+  console.error("Failed to invoke model:", error);
+  process.exitCode = 1;
+});
